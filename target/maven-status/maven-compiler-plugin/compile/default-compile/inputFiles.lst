@@ -1,7 +1,9 @@
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\dao\UserDao.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\servlet\DeleteUserServlet.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\servlet\AllUserServlet.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\servlet\UpdateUserServlet.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\servlet\AddUserServlet.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\model\User.java
-C:\Users\manager\IdeaProjects\Users Application\src\main\java\service\UserService.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\dao\UserDao.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\dao\UserJdbcDao.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\service\UserService.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\model\User.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\servlet\AllUserServlet.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\servlet\AddUserServlet.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\servlet\UpdateUserServlet.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\dao\UserHibernateDao.java
+C:\Users\manager\IdeaProjects\untitled2\src\main\java\servlet\DeleteUserServlet.java

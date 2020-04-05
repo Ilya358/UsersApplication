@@ -1,6 +1,5 @@
 package servlet;
 
-import dao.UserDao;
 import model.User;
 import service.UserService;
 
@@ -15,9 +14,9 @@ import java.util.List;
 
 @WebServlet("/all")
 public class AllUserServlet extends HttpServlet {
+    private UserService userService = UserService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        UserService userService = new UserService();
         List<User> listUser = userService.getAllUser();
         req.setAttribute("listUser", listUser);
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("AllUsers.jsp");

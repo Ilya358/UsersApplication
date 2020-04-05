@@ -14,6 +14,7 @@ import java.io.IOException;
 
 @WebServlet("/add")
 public class AddUserServlet extends HttpServlet {
+    private UserService userService = UserService.getInstance();
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         RequestDispatcher requestDispatcher = req.getRequestDispatcher("addUser.jsp");
@@ -26,7 +27,7 @@ public class AddUserServlet extends HttpServlet {
         String name = req.getParameter("name");
         String surname = req.getParameter("surname");
         User user = new User(name, surname);
-        UserService.addUser(user);
+        userService.addUser(user);
         resp.sendRedirect("/untitled2_war_exploded/all");
     }
 }
