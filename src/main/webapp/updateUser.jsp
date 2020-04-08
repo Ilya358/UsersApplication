@@ -1,8 +1,8 @@
 <%--
   Created by IntelliJ IDEA.
   User: manager
-  Date: 01.04.2020
-  Time: 0:14
+  Date: 06.04.2020
+  Time: 18:44
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,16 +22,16 @@
     </h1>
 </center>
 <div align="center">
-        <form action="add" method="post">
+    <form action="update" method="post">
             <table border="1" cellpadding="5">
                 <caption>
-                    <h2>Add New User</h2>
+                    <h2>Update User</h2>
                 </caption>
                     <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
                 <tr>
                     <th>Name: </th>
                     <td>
-                        <input type="text" name="name" size="45" placeholder="Name"
+                        <input type="text" name="name" size="45"
                                value="<c:out value='${user.name}' />"
                         />
                     </td>
@@ -39,7 +39,7 @@
                 <tr>
                     <th>Surname: </th>
                     <td>
-                        <input type="text" name="surname" size="45" placeholder="Surname"
+                        <input type="text" name="surname" size="45"
                                value="<c:out value='${user.surname}' />"
                         />
                     </td>
@@ -54,3 +54,4 @@
 </div>
 </body>
 </html>
+

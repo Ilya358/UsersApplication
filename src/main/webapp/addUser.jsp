@@ -22,30 +22,16 @@
     </h1>
 </center>
 <div align="center">
-    <c:if test="${user != null}">
-    <form action="update" method="post">
-        </c:if>
-        <c:if test="${user == null}">
         <form action="add" method="post">
-            </c:if>
             <table border="1" cellpadding="5">
                 <caption>
-                    <h2>
-                        <c:if test="${user != null}">
-                            Update User
-                        </c:if>
-                        <c:if test="${user == null}">
-                            Add New User
-                        </c:if>
-                    </h2>
+                    <h2>Add New User</h2>
                 </caption>
-                <c:if test="${user != null}">
                     <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
-                </c:if>
                 <tr>
                     <th>Name: </th>
                     <td>
-                        <input type="text" name="name" size="45"
+                        <input type="text" name="name" size="45" placeholder="Name"
                                value="<c:out value='${user.name}' />"
                         />
                     </td>
@@ -53,7 +39,7 @@
                 <tr>
                     <th>Surname: </th>
                     <td>
-                        <input type="text" name="surname" size="45"
+                        <input type="text" name="surname" size="45" placeholder="Surname"
                                value="<c:out value='${user.surname}' />"
                         />
                     </td>

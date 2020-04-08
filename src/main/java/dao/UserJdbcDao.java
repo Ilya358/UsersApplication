@@ -37,6 +37,26 @@ public class UserJdbcDao implements UserDao{
         return list;
     }
 
+    public User getUserById(long id)  {
+        try {
+            Statement stmt = connection.createStatement();
+            stmt.execute("select * from user where name='" + id + "'");
+            ResultSet result = stmt.getResultSet();
+            if (result.next()) {
+                Long id1 = result.getLong(1);
+                String name = result.getString(2);
+                String surname = result.getString(3);
+                User user = new User(id1, name, surname);
+                result.close();
+                stmt.close();
+                return user;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public void updateUser(User user) throws SQLException {
         String update = "UPDATE user SET name = ?, surname = ? where id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(update);
@@ -63,32 +83,5 @@ public class UserJdbcDao implements UserDao{
         pstmt.setString(2, user.getSurname());
         pstmt.executeUpdate();
         pstmt.close();
-    }
-    private static Connection getMysqlConnection() {
-        try {
-            DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
-            StringBuilder url = new StringBuilder();
-
-            url.
-                    append("jdbc:mysql://").        //db type
-                    append("localhost:").           //host name
-                    append("3306/").                //port
-                    append("db_example?").          //db name
-                    append("user=root&").          //login
-                    append("password=12345678").       //password
-                    append("&serverTimezone=GMT");   //timeZone
-
-            System.out.println("URL: " + url + "\n");
-
-            Connection connection = DriverManager.getConnection(url.toString());
-
-            return connection;
-        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
-            e.printStackTrace();
-            throw new IllegalStateException();
-        }
-    }
-    private static UserJdbcDao getUserDao() {
-        return new UserJdbcDao(getMysqlConnection());
     }
 }

@@ -1,5 +1,6 @@
 package util;
 
+import dao.UserJdbcDao;
 import model.User;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
@@ -11,14 +12,23 @@ import org.hibernate.internal.SessionFactoryImpl;
 import org.hibernate.service.ServiceRegistry;
 
 import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
 public class DBHelper {
-
+    private static DBHelper instance;
     private static SessionFactory sessionFactory;
+    private DBHelper () {}
+    public static DBHelper getInstance() {
+        if(instance == null) {
+            instance = new DBHelper();
+        }
+        return instance;
+    }
 
-    public static SessionFactory getSessionFactory() {
+    public static SessionFactory getConfiguration() {
         if (sessionFactory == null) {
             sessionFactory = createSessionFactory();
         }
@@ -48,4 +58,31 @@ public class DBHelper {
         return configuration.buildSessionFactory(serviceRegistry);
     }
 
+    private static Connection getMysqlConnection() {
+        try {
+            DriverManager.registerDriver((Driver) Class.forName("com.mysql.jdbc.Driver").newInstance());
+            StringBuilder url = new StringBuilder();
+
+            url.
+                    append("jdbc:mysql://").        //db type
+                    append("localhost:").           //host name
+                    append("3306/").                //port
+                    append("db_example?").          //db name
+                    append("user=root&").          //login
+                    append("password=12345678").       //password
+                    append("&serverTimezone=GMT");   //timeZone
+
+            System.out.println("URL: " + url + "\n");
+
+            Connection connection = DriverManager.getConnection(url.toString());
+
+            return connection;
+        } catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+            throw new IllegalStateException();
+        }
+    }
+    public static Connection getConnection() {
+        return getMysqlConnection();
+    }
 }
