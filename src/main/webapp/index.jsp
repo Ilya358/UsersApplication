@@ -10,16 +10,17 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
-    <title>Users Application</title>
+    <title>Start page</title>
 </head>
 <body>
 <center>
     <h1>
-        <a href="/untitled2_war_exploded/add">Add New User</a>
+        <a href="/untitled2_war_exploded/login">Login</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/untitled2_war_exploded/all">List All Users</a>
+        <a href="/untitled2_war_exploded/registration">Registration</a>
     </h1>
 </center>
 </body>
 </html>
+
 

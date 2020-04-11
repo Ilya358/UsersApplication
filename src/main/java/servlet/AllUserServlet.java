@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-@WebServlet("/all")
+@WebServlet("/adminAll")
 public class AllUserServlet extends HttpServlet {
     private UserService userService = UserService.getInstance();
     @Override

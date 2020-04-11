@@ -15,24 +15,40 @@
 <body>
 <center>
     <h1>
-        <a href="/untitled2_war_exploded/add">Add New User</a>
+        <a href="/untitled2_war_exploded/adminAdd">Add New User</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/untitled2_war_exploded/all">List All Users</a>
+        <a href="/untitled2_war_exploded/adminAll">Users List</a>
 
     </h1>
 </center>
 <div align="center">
-        <form action="add" method="post">
+        <form action="adminAdd" method="post">
             <table border="1" cellpadding="5">
                 <caption>
                     <h2>Add New User</h2>
                 </caption>
                     <input type="hidden" name="id" value="<c:out value='${user.id}' />" />
                 <tr>
+                    <th>Role: </th>
+                    <td>
+                        <input type="text" name="role" size="45" placeholder="Role"
+                               value="<c:out value='${user.role}' />"
+                        />
+                    </td>
+                </tr>
+                <tr>
                     <th>Name: </th>
                     <td>
                         <input type="text" name="name" size="45" placeholder="Name"
                                value="<c:out value='${user.name}' />"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Password: </th>
+                    <td>
+                        <input type="text" name="password" size="45" placeholder="Password"
+                               value="<c:out value='${user.password}' />"
                         />
                     </td>
                 </tr>

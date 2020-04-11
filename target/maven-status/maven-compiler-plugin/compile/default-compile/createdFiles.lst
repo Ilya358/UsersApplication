@@ -1,9 +1,9 @@
-servlet\AddUserServlet.class
 servlet\DeleteUserServlet.class
 servlet\UpdateUserServlet.class
-servlet\AllUserServlet.class
 dao\UserHibernateDao.class
 service\UserService.class
 dao\UserDao.class
+servlet\AddUserServlet.class
+servlet\AllUserServlet.class
 dao\UserJdbcDao.class
 model\User.class

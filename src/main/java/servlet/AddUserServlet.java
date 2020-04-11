@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet("/add")
+@WebServlet("/adminAdd")
 public class AddUserServlet extends HttpServlet {
     private UserService userService = UserService.getInstance();
     @Override
@@ -24,10 +24,12 @@ public class AddUserServlet extends HttpServlet {
     @SneakyThrows
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String role = req.getParameter("role");
         String name = req.getParameter("name");
+        String password = req.getParameter("password");
         String surname = req.getParameter("surname");
-        User user = new User(name, surname);
+        User user = new User(role, name, password, surname);
         userService.addUser(user);
-        resp.sendRedirect("/untitled2_war_exploded/all");
+        resp.sendRedirect("/untitled2_war_exploded/adminAll");
     }
 }

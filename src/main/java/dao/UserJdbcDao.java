@@ -14,6 +14,7 @@ public class UserJdbcDao implements UserDao{
         this.connection = connection;
     }
 
+    @Override
     public List<User> getAllUser() {
         List<User> list = new ArrayList<>();
         String update = "select * from user";
@@ -24,9 +25,11 @@ public class UserJdbcDao implements UserDao{
             ResultSet resultSet = pstmt.getResultSet();
             while (resultSet.next()) {
                 Long id1 = resultSet.getLong(1);
-                String name1 = resultSet.getString(2);
-                String surname = resultSet.getString(3);
-                User user = new User(id1, name1, surname);
+                String role = resultSet.getString(2);
+                String name = resultSet.getString(3);
+                String password = resultSet.getString(4);
+                String surname = resultSet.getString(5);
+                User user = new User(id1, role, name, password, surname);
                 list.add(user);
             }
             resultSet.close();
@@ -37,26 +40,27 @@ public class UserJdbcDao implements UserDao{
         return list;
     }
 
-    public User getUserById(long id)  {
-        try {
-            Statement stmt = connection.createStatement();
-            stmt.execute("select * from user where name='" + id + "'");
-            ResultSet result = stmt.getResultSet();
-            if (result.next()) {
-                Long id1 = result.getLong(1);
-                String name = result.getString(2);
-                String surname = result.getString(3);
-                User user = new User(id1, name, surname);
-                result.close();
-                stmt.close();
-                return user;
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
+    @Override
+    public User getUserById(Long id) throws SQLException {
+        User user = null;
+        String getUserById = "SELECT * FROM user WHERE id=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(getUserById);
+        preparedStatement.setLong(1, id);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            Long id1 = resultSet.getLong(1);
+            String role = resultSet.getString(2);
+            String name = resultSet.getString(3);
+            String password = resultSet.getString(4);
+            String surname = resultSet.getString(5);
+            user = new User(id1, role, name, password, surname);
+            resultSet.close();
+            preparedStatement.close();
         }
-        return null;
+        return user;
     }
 
+    @Override
     public void updateUser(User user) throws SQLException {
         String update = "UPDATE user SET name = ?, surname = ? where id = ?";
         PreparedStatement preparedStatement = connection.prepareStatement(update);
@@ -67,7 +71,7 @@ public class UserJdbcDao implements UserDao{
         preparedStatement.close();
     }
 
-
+    @Override
     public void deleteUser(Long id) throws SQLException {
         String update = "delete from user where id=?";
         PreparedStatement pstmt = connection.prepareStatement(update);
@@ -76,12 +80,65 @@ public class UserJdbcDao implements UserDao{
         pstmt.close();
     }
 
+    @Override
     public void addUser(User user) throws SQLException {
-        String update = "insert into user(name, surname) values(?, ?)";
+        String update = "insert into user(role, name, password, surname) values(?, ?, ?, ?)";
         PreparedStatement pstmt = connection.prepareStatement(update);
-        pstmt.setString(1, user.getName());
-        pstmt.setString(2, user.getSurname());
+        pstmt.setString(1, user.getRole());
+        pstmt.setString(2, user.getName());
+        pstmt.setString(3, user.getPassword());
+        pstmt.setString(4, user.getSurname());
         pstmt.executeUpdate();
         pstmt.close();
+    }
+
+    @Override
+    public void creatAdmin() throws SQLException {
+        String update = "insert into user(role, name, password, surname) values(?, ?, ?, ?)";
+        User admin = new User ("admin", "admin", "08211208", "admin");
+        PreparedStatement pstmt = connection.prepareStatement(update);
+        pstmt.setString(1, admin.getRole());
+        pstmt.setString(2, admin.getName());
+        pstmt.setString(3, admin.getPassword());
+        pstmt.setString(4, admin.getSurname());
+        pstmt.executeUpdate();
+        pstmt.close();
+    }
+
+    @Override
+    public boolean validateUser(String name, String password) throws SQLException {
+        String update = "select password from user where name = ?";
+        PreparedStatement pstmt = connection.prepareStatement(update);
+        pstmt.setString(1, name);
+        pstmt.execute();
+        ResultSet resultSet = pstmt.getResultSet();
+        if (resultSet.next()) {
+            String password1 = resultSet.getString(1);
+            pstmt.close();
+            return password.equals(password1);
+        } else {
+            return false;
+        }
+    }
+
+    @Override
+    public User getUserByNameAndPassword(String name, String password) throws SQLException {
+        User user = null;
+        String getUserByName = "SELECT * FROM user WHERE name = ? and password = ?";
+        PreparedStatement preparedStatement = connection.prepareStatement(getUserByName);
+        preparedStatement.setString(1, name);
+        preparedStatement.setString(2, password);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        if (resultSet.next()) {
+            Long id1 = resultSet.getLong(1);
+            String role = resultSet.getString(2);
+            String name1 = resultSet.getString(3);
+            String password1 = resultSet.getString(4);
+            String surname = resultSet.getString(5);
+            user = new User(id1, role, name1, password1, surname);
+            resultSet.close();
+            preparedStatement.close();
+        }
+        return user;
     }
 }

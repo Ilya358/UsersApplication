@@ -15,9 +15,9 @@
 <body>
 <center>
     <h1>
-        <a href="/untitled2_war_exploded/add">Add New User</a>
+        <a href="/untitled2_war_exploded/adminAdd">Add New User</a>
         &nbsp;&nbsp;&nbsp;
-        <a href="/untitled2_war_exploded/all">List All Users</a>
+        <a href="/untitled2_war_exploded/adminAll">Users List</a>
 
     </h1>
 </center>
@@ -26,19 +26,23 @@
         <caption><h2>List of Users</h2></caption>
         <tr>
             <th>ID</th>
+            <th>Role</th>
             <th>Name</th>
+            <th>Password</th>
             <th>Surname</th>
             <th>Actions</th>
         </tr>
         <c:forEach var="user" items="${listUser}">
             <tr>
                 <td><c:out value="${user.id}" /></td>
+                <td><c:out value="${user.role}" /></td>
                 <td><c:out value="${user.name}" /></td>
+                <td><c:out value="${user.password}" /></td>
                 <td><c:out value="${user.surname}" /></td>
                 <td>
-                    <a href="/untitled2_war_exploded/update?id=<c:out value='${user.id}' />">Update</a>
+                    <a href="/untitled2_war_exploded/adminUpdate?id=<c:out value='${user.id}' />">Update</a>
                     &nbsp;&nbsp;&nbsp;&nbsp;
-                    <a href="/untitled2_war_exploded/delete?id=<c:out value='${user.id}' />">Delete</a>
+                    <a href="/untitled2_war_exploded/adminDelete?id=<c:out value='${user.id}' />">Delete</a>
                 </td>
             </tr>
         </c:forEach>

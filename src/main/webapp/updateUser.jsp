@@ -13,16 +13,8 @@
     <title>Users Application</title>
 </head>
 <body>
-<center>
-    <h1>
-        <a href="/untitled2_war_exploded/add">Add New User</a>
-        &nbsp;&nbsp;&nbsp;
-        <a href="/untitled2_war_exploded/all">List All Users</a>
-
-    </h1>
-</center>
 <div align="center">
-    <form action="update" method="post">
+    <form action="userUpdate" method="post">
             <table border="1" cellpadding="5">
                 <caption>
                     <h2>Update User</h2>
@@ -33,6 +25,14 @@
                     <td>
                         <input type="text" name="name" size="45"
                                value="<c:out value='${user.name}' />"
+                        />
+                    </td>
+                </tr>
+                <tr>
+                    <th>Password: </th>
+                    <td>
+                        <input type="text" name="password" size="45"
+                               value="<c:out value='${user.password}' />"
                         />
                     </td>
                 </tr>

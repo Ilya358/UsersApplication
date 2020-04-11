@@ -1,13 +1,9 @@
 package service;
 
 import dao.UserDao;
-import dao.UserHibernateDao;
-import dao.UserJdbcDao;
 import factory.DaoFactory;
 import factory.UserDaoFactory;
 import model.User;
-import org.hibernate.SessionFactory;
-import util.DBHelper;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -31,7 +27,7 @@ public class UserService {
         return userDao.getAllUser();
     }
 
-    public User getUserById(long id) {
+    public User getUserById(long id) throws SQLException {
             return userDao.getUserById(id);
     }
 
@@ -45,5 +41,14 @@ public class UserService {
 
     public void updateUser(User user) throws SQLException {
         userDao.updateUser(user);
+    }
+    public void creatAdmin() throws SQLException {
+        userDao.creatAdmin();
+    }
+    public boolean validateUser(String name, String password) throws SQLException {
+        return userDao.validateUser(name, password);
+    }
+    public User getUserByNameAndPassword(String name, String password) throws SQLException {
+        return userDao.getUserByNameAndPassword(name, password);
     }
 }

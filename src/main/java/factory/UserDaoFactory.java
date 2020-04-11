@@ -8,12 +8,6 @@ import java.io.FileReader;
 import java.util.Properties;
 
 public class UserDaoFactory {
-//    private DaoFactory daoFactory;
-
-//    public UserDaoFactory() {
-//        this.daoFactory = getDaoFactory();
-//    }
-
     @SneakyThrows
     private static String getProperties() {
         FileInputStream file = new FileInputStream("C:/Users/manager/IdeaProjects/untitled2/src/main/resources/DB");
